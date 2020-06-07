@@ -4,6 +4,8 @@ namespace Mailing;
 
 use Mailing\Contracts\Mailers\MailerInterface;
 
+use Mailing\Mailers\Mailer;
+
 class SendMail
 {
     /**
@@ -11,13 +13,18 @@ class SendMail
      */
     private $mailer;
 
-    /**
-     *  @param MailerInterface $mailer
-     */
-    public function __construct(MailerInterface $mailer)
+
+    public function __construct(Mailer $mailer)
     {
         $this->mailer = $mailer;
     }
+    //  /**
+    //  *  @param MailerInterface $mailer
+    //  */
+    // public function __construct(MailerInterface $mailer)
+    // {
+    //     $this->mailer = $mailer;
+    // }
 
     /**
      * @return string
@@ -27,7 +34,7 @@ class SendMail
         if ($this->mailer->send()) {
             return $this->mailer->confirmmationMessage();
         }
-        
+
         return $this->mailer->errorMessage();
     }
 }
